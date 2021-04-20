@@ -84,7 +84,7 @@ func WithNameMpaper(mapper schema.NameMapper) optionFunc {
 }
 
 // WithDryRun is dry run.
-// this will disable ping()
+// only skip real op, does't include sql prepare
 func WithDryRun(dryRun bool) optionFunc {
 	return func(o *options) {
 		o.dryRun = dryRun

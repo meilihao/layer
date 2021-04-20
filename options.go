@@ -90,7 +90,6 @@ func WithDryRun(dryRun bool) optionFunc {
 }
 
 // WithDebug is debug sql.
-// this will disable ping()
 func WithDebug(debug bool) optionFunc {
 	return func(o *options) {
 		o.debug = debug

@@ -11,10 +11,14 @@ var (
 )
 
 func init() {
-	l, _ = layer.New(
-		layer.WithRunTest(true),
+	var err error
+	l, err = layer.New(
+		// layer.WithRunTest(true),
 		layer.WithDB("mysql", "xxx"),
 	)
+	if err != nil {
+		log.Panic(err)
+	}
 }
 
 func main() {

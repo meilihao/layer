@@ -21,6 +21,7 @@ type options struct {
 	dryRun    bool
 	runTest   bool
 	debug     bool
+	skipPing  bool
 
 	// table/column name
 	nameMapper schema.NameMapper
@@ -38,6 +39,7 @@ func WithDB(driverName, dataSourceName string) optionFunc {
 }
 
 // WithConnMaxLifetime set ConnMaxLifetime for std (*sql.DB).SetConnMaxLifetime()
+// 避免数据库主动断开连接,造成死连接.MySQL默认wait_timeout 28800秒(8小时)
 func WithConnMaxLifetime(connMaxLifetime time.Duration) optionFunc {
 	return func(o *options) {
 		o.connMaxLifetime = connMaxLifetime
@@ -93,6 +95,13 @@ func WithDryRun(dryRun bool) optionFunc {
 func WithDebug(debug bool) optionFunc {
 	return func(o *options) {
 		o.debug = debug
+	}
+}
+
+// WithSkipPing check db connection
+func WithSkipPing(skipPing bool) optionFunc {
+	return func(o *options) {
+		o.skipPing = skipPing
 	}
 }
 

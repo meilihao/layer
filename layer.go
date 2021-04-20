@@ -57,7 +57,7 @@ func New(opts ...optionFunc) (*Layer, error) {
 			l.db.SetMaxOpenConns(l.opts.maxOpenConns)
 		}
 
-		if !l.opts.dryRun {
+		if !l.opts.skipPing {
 			if err = l.db.Ping(); err != nil {
 				return nil, err
 			}
